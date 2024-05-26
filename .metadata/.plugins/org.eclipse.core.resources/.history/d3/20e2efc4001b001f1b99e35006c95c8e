@@ -1,0 +1,59 @@
+package org.zerock.service;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.zerock.dto.TodoDTO;
+import org.zerock.entity.TodoEntity;
+import org.zerock.repository.TodoRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+@Log4j2
+public class TodoService {
+	
+	private final TodoRepository repository;
+	
+	/** dto 내용 삽입
+	 * @param dto
+	 * @return
+	 */
+	public Long register(TodoDTO dto) {
+		TodoEntity entity = dto.toEntity();
+		entity = repository.save(entity);
+		return entity.getTno();
+	}
+	
+	
+	public TodoDTO read(Long tno) {
+		return repository.getDTO(tno);
+	}
+	
+	
+	public void modify(TodoDTO dto) {
+		repository.save(dto.toEntity());
+	}
+	
+	
+	public void remove(Long tno) {
+		repository.deleteById(tno);
+	}
+	
+	
+	public Page<TodoDTO> getList(int page, int size) {
+		
+		Pageable pageable = PageRequest.of(page-1, size, Sort.by("tno").descending());
+		
+		return repository.listSearch(pageable)
+	}
+	
+	
+	
+}

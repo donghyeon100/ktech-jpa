@@ -1,0 +1,13 @@
+package org.zerock.dto;
+
+import java.time.LocalDate;
+
+import lombok.Data;
+
+@Data
+public class TodoDTO {
+	private Long tno;
+	private String title;
+	private String writer;
+	private LocalDate dueDate;
+}

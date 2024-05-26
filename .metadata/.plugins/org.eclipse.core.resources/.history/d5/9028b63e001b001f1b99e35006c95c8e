@@ -1,0 +1,25 @@
+package org.zerock.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.zerock.dto.TodoDTO;
+import org.zerock.entity.TodoEntity;
+import org.zerock.repository.TodoRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+@Log4j2
+public class TodoService {
+	
+	private final TodoRepository repository;
+	
+	public Long register(TodoDTO dto) {
+		TodoEntity entity = TodoDTO.toEntity(dto);
+		entity = repository.save(entity);
+		return entity.getTno();
+	}
+}

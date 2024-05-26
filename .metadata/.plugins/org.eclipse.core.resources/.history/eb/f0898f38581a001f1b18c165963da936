@@ -1,0 +1,13 @@
+package org.zerock.repository;
+
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import jakarta.transaction.Transactional;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional(propagation = Transactional.Propagation.NOT_SUPPORTED)
+public class TodoRepository {
+
+}

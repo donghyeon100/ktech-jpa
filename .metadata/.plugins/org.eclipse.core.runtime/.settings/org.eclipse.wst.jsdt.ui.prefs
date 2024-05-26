@@ -1,0 +1,8 @@
+CONTENT_ASSIST_BACKGROUND_COLOR=18,35,24
+CONTENT_ASSIST_FOREGROUND_COLOR=228,241,233
+content_assist_parameters_background=18,35,24
+content_assist_parameters_foreground=228,241,233
+content_assist_proposals_background=18,35,24
+content_assist_proposals_foreground=228,241,233
+eclipse.preferences.version=1
+overriddenByCSS=,CONTENT_ASSIST_BACKGROUND_COLOR,CONTENT_ASSIST_FOREGROUND_COLOR,content_assist_parameters_background,content_assist_parameters_foreground,content_assist_proposals_background,content_assist_proposals_foreground,

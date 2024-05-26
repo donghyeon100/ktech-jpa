@@ -1,0 +1,40 @@
+package org.zerock.repository.search;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.zerock.dto.TodoDTO;
+import org.zerock.entity.QTodoEntity;
+import org.zerock.entity.TodoEntity;
+
+import com.querydsl.jpa.JPQLQuery;
+
+import lombok.extern.log4j.Log4j2;
+
+// QuerydslRepositorySupport : 페이징, 검색을 간단히 처리할 수 있음
+
+@Log4j2
+public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSearch {
+
+	
+	public TodoSearchImpl() {
+		// 도메인 클래스를 부모(QuerydslRepositorySupport) 생성자 파라미터로 전달
+		super(TodoEntity.class);
+	}
+	
+	
+	@Override
+	public Page<TodoDTO> listSearch(Pageable pageable) {
+		
+		
+		QTodoEntity todoEntity = QTodoEntity.todoEntity;
+		
+		// 메서드를 이용해서 SQL을 생성
+		JPQLQuery<TodoEntity> query = from(todoEntity);
+		query.where(todoEntity.tno.gt(0)); // == where tno > 0  (인덱스 사용을 위해)
+		
+		this.getQuerydsl().applyPagination(pageable, query); 
+		
+		return null;
+	}
+}

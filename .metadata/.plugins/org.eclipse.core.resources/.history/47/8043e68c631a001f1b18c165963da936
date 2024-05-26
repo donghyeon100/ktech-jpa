@@ -1,0 +1,11 @@
+package org.zerock.repository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.zerock.entity.TodoEntity;
+
+public interface TodoRepository extends JpaRepository<TodoEntity, Long> {
+
+	Page<TodoEntity> list1(Pageable pageable);
+}

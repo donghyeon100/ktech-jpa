@@ -1,0 +1,8 @@
+package org.zerock.repository;
+
+import org.zerock.entity.TodoEntity;
+
+public interface TodoRepository extends JpaRepository<TodoEntity, Long> {
+
+	
+}

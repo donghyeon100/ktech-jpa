@@ -1,0 +1,10 @@
+package org.zerock.entity;
+
+import jakarta.persistence.Entity;
+
+// Entity : DB의 테이블과 매핑될 Java Class
+
+@Entity
+public class TodoEntity {
+
+}

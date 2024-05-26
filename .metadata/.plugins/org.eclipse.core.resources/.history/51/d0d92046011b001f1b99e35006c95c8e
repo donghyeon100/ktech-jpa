@@ -1,0 +1,24 @@
+package org.zerock.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.zerock.service.TodoService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@RestController
+@RequestMapping("api/todos")
+@RequiredArgsConstructor
+@Log4j2
+public class TodoController {
+
+	private final TodoService service;
+	
+	@GetMapping("list")
+	public Page<TodoDTO> list(int page, int size) {
+		return service.getList(page, size);
+	}
+	
+}
