@@ -21,7 +21,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Getter
-@Setter
 public class TodoEntity {
 
 	// JPA가 데이터 비교시 equals(), hashCode()를 사용하기 때문에
@@ -37,4 +36,8 @@ public class TodoEntity {
 	private String writer;
 	
 	private java.time.LocalDate dueDate;
+
+	public void addTitle(String titl) {
+		this.title = titl;
+	}
 }

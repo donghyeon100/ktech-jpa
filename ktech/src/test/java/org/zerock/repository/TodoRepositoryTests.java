@@ -14,10 +14,14 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.dto.TodoDTO;
+import org.zerock.dto.TodoListDTO;
 import org.zerock.entity.TodoEntity;
 
 
+
 @DataJpaTest //  JPA와 관련된 컴포넌트만 로드하여 테스트
+// 단인 Entity에 대한 테스트 시 사용
+// 연관 Entity는 문제 발생함
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 // 임베디드 데이터베이스(H2) 대신 실제 데이터베이스를(Maria DB) 사용하도록 설정
@@ -120,8 +124,8 @@ public class TodoRepositoryTests {
 		System.out.println(entity);
 		
 		// title : Test55
-		
-		entity.setTitle("55..................");
+
+		entity.addTitle("55.................");
 		// @Transactional이 존재 == Dirty Checking 수행
 		// -> select된 Entity의 값을 변경 
 		// -> 변경된 Entity의 값과 DB를 비교하여
@@ -173,5 +177,21 @@ public class TodoRepositoryTests {
 		Page<TodoDTO> result = todoRepository.listSearch(pageable);
 		result.getContent().forEach(dto -> System.out.println(dto));
 	}
+	
+	
+	// -------------------------------------------------------------------------------------
+
+	// todo 목록(tno, title, reveiwCout) 조회 테스트
+	@Test
+	public void testListSearchCount() {
+		Pageable pageable = PageRequest.of(0, 10, Sort.by("tno").descending());
+		
+		Page<TodoListDTO> result = todoRepository.listSearchCount(pageable);
+		
+		result.getContent().forEach(dto -> System.out.println(dto));
+	}
+	
+	
+	
 	
 }

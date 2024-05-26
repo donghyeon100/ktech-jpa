@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zerock.dto.TodoDTO;
+import org.zerock.dto.TodoListDTO;
 import org.zerock.service.TodoService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,13 @@ public class TodoController {
 	public ResponseEntity<Page<TodoDTO>> list() {
 		return ResponseEntity.ok(todoService.getList(1, 10));
 	}
+	
+	
+	@GetMapping("list2")
+	public ResponseEntity<Page<TodoListDTO>> listWithCount() {
+		return ResponseEntity.ok(todoService.getListWithCount(1, 10));
+	}
+	
 	
 	@GetMapping("read/{tno}")
 	public ResponseEntity<TodoDTO> todo(

@@ -7,13 +7,14 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.zerock.dto.TodoDTO;
+import org.zerock.dto.TodoListDTO;
+import org.zerock.entity.QReviewEntity;
 import org.zerock.entity.QTodoEntity;
 import org.zerock.entity.TodoEntity;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 
-import jakarta.persistence.OneToMany;
 import lombok.extern.log4j.Log4j2;
 
 // QuerydslRepositorySupport : 페이징, 검색을 간단히 처리할 수 있음
@@ -66,7 +67,47 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
 	}
 	
 	
+	
+	// Todo 목록 조회 + 리뷰 수 조회
+	@Override
+	public Page<TodoListDTO> listSearchCount(Pageable pageable) {
+		
+		// QTodoEntity를 통해 타입 안전한 쿼리를 작성
+		QTodoEntity todoEntity = QTodoEntity.todoEntity;
+		
+		QReviewEntity reviewEntity = QReviewEntity.reviewEntity;
+				
+		
+		// 쿼리 작성을 위해 JPQLQuery 객체 생성
+		JPQLQuery<TodoEntity> query = from(todoEntity)
+				.leftJoin(reviewEntity) 
+				.on(reviewEntity.todoEntity.eq(todoEntity)) // ANSI LEFT JOIN을 JAVA로 쓴 것
+				.groupBy(todoEntity);
+		
+		
+//		query.where(todoEntity.tno.gt(0)); // == where tno > 0  (인덱스 사용을 위해)
+		
+		this.getQuerydsl().applyPagination(pageable, query);
+		
+		//query.select(Projections.bean(쿼리 결과를 저장할 클래스, 속성))
+		JPQLQuery<TodoListDTO> dtoQuery = query.select(Projections.bean(TodoListDTO.class,
+				todoEntity.tno, todoEntity.title,
+				// 조회 결과와 TodoListDTO의 필드명이 같으면 자동 세팅
+				
+				reviewEntity.rno.countDistinct().as("reviewCount")
+				// 조회된 reviewEntity의 rno 개수 카운트(중복 제거) 
+				//	-> reviewCount로 별칭 줘서 TodoListDTO.reviewCount에 자동 세팅
+				));
+		
+		List<TodoListDTO> dtoList = dtoQuery.fetch();
+		long count = dtoQuery.fetchCount();
+		
+		return new PageImpl<>(dtoList, pageable, count);
+	}
 }
+
+
+
 
 
 

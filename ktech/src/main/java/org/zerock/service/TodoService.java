@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.dto.TodoDTO;
+import org.zerock.dto.TodoListDTO;
 import org.zerock.entity.TodoEntity;
 import org.zerock.repository.TodoRepository;
 
@@ -65,6 +66,17 @@ public class TodoService {
 	public Page<TodoDTO> getList(int page, int size) {
 		Pageable pageable = PageRequest.of(page-1, size, Sort.by("tno").descending());
 		return repository.listSearch(pageable);
+	}
+	
+	
+	/** 목록 조회 + 리뷰 수 조회
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public Page<TodoListDTO> getListWithCount(int page, int size) {
+		Pageable pageable = PageRequest.of(page-1, size, Sort.by("tno").descending());
+		return repository.listSearchCount(pageable);
 	}
 	
 	
