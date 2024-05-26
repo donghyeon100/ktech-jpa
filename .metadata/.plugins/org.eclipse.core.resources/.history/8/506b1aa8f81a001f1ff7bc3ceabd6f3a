@@ -1,5 +1,0 @@
-package org.zerock.repository.search;
-
-public interface TodoSearchImpl {
-
-}

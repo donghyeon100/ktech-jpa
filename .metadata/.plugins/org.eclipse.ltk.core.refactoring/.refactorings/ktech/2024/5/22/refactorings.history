@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename field &apos;service&apos; in &apos;org.zerock.controller.TodoController&apos; to &apos;todoService&apos;&#x0D;&#x0A;- Original project: &apos;ktech&apos;&#x0D;&#x0A;- Original element: &apos;org.zerock.controller.TodoController.service&apos;&#x0D;&#x0A;- Renamed element: &apos;org.zerock.controller.TodoController.todoService&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;service&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;org.zerock.controller{TodoController.java[TodoController^service" name="todoService" references="true" setter="false" stamp="1716687840768" textual="false" version="1.0"/>
-</session>

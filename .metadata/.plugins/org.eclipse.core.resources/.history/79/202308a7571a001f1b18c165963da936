@@ -1,7 +1,0 @@
-package org.zerock.repository;
-
-import org.zerock.entity.TodoEntity;
-
-public class TodoRepository extends JpaRepository<TodoEntity, Long> {
-
-}

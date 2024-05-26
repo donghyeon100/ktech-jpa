@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="TodoRepositoryTests.testRead" project="ktech" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="org.zerock.repository.TodoRepositoryTests" time="0.416" displayname="TodoRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:org.zerock.repository.TodoRepositoryTests]">
-    <testcase name="testRead" classname="org.zerock.repository.TodoRepositoryTests" time="0.416" displayname="testRead()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.repository.TodoRepositoryTests]/[method:testRead()]"/>
-  </testsuite>
-</testrun>
